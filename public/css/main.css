@@ -23,6 +23,7 @@ body {
 	margin: 0 auto;
 	border: 10px ridge #5095d4;
 	background: white;
+	padding: 10px;
 }
 
 .form {
@@ -54,4 +55,36 @@ body {
 	background: #3cb0fd;
 	background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
 	text-decoration: none;
+}
+
+.req-name {
+	font-size: 1.5em;
+    padding: 5px 0;
+}
+table {
+	border-collapse: collapse;
+	width: 100%;
+    table-layout: fixed;
+}
+td {
+	border: 1px solid black;
+	padding: 10px;
+}
+td.regNumber {
+	width: 100px;
+}
+td.regAuthority {
+
+}
+td.reqDate, td.expDate {
+	width: 100px;
+}
+td.state {
+	width: 150px;
+}
+tr.expired {
+	background: rgba(224, 23, 23, 0.29);
+}
+tr.valid {
+	background: rgba(0, 128, 0, 0.37);
 }
