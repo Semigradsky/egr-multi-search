@@ -6,6 +6,8 @@ const exphbs = require('express-handlebars');
 
 const app = express();
 
+app.set('port', (process.env.PORT || 5000));
+
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
@@ -61,6 +63,6 @@ app.post('/search', (req, res) => {
 
 })
 
-app.listen(3000, () => {
+app.listen(app.get('port'), () => {
 	console.log('Example app listening on port 3000!');
 });
