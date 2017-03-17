@@ -33,6 +33,11 @@ body {
 .form textarea {
 	width: 100%;
 	resize: vertical;
+	padding: 10px;
+}
+.form label {
+	display: inline-block;
+    margin: 5px 0;
 }
 .form .buttons {
 	padding-top: 10px;
@@ -70,21 +75,37 @@ td {
 	border: 1px solid black;
 	padding: 10px;
 }
-td.regNumber {
+
+.egr--ngb td.regNumber {
 	width: 100px;
 }
-td.regAuthority {
+.egr--ngb td.regAuthority {
 
 }
-td.reqDate, td.expDate {
+.egr--ngb td.reqDate,
+.egr--ngb td.expDate {
 	width: 100px;
 }
-td.state {
+.egr--ngb td.state {
 	width: 150px;
 }
-tr.expired {
+.egr--ngb tr.expired {
 	background: rgba(224, 23, 23, 0.29);
 }
-tr.valid {
+.egr--ngb tr.valid {
 	background: rgba(0, 128, 0, 0.37);
+}
+
+.portal-nalog--ngb td.unpNumber {
+	width: 110px;
+}
+.portal-nalog--ngb td.reqDate,
+.portal-nalog--ngb td.dfrDate {
+	width: 100px;
+}
+.portal-nalog--ngb td.periodTime {
+	width: 150px;
+}
+.portal-nalog--ngb td.reason {
+	width: 150px;
 }

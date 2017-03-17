@@ -1,0 +1,16 @@
+<form action="/search" method="POST" class="form">
+	<fieldset>
+		<label>
+			<input type="radio" name="source" value="egr.gov.by/egrn" checked />
+			Поиск в базе данных Единого государственного регистра юридических лиц и индивидуальных предпринимателей
+		</label>
+		<label>
+			<input type="radio" name="source" value="portal.nalog.gov.by/ngb" />
+			Поиск в реестре коммерческих организаций и индивидуальных предпринимателей с повышенным риском совершения правонарушений в экономической сфере
+		</label>
+	</fieldset>
+	<textarea placeholder="Что ищем?" required name="names" rows="20"></textarea>
+	<div class="buttons">
+		<button class="button" type="submit">ПОИСК</button>
+	</div>
+</form>

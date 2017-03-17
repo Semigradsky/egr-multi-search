@@ -45,7 +45,34 @@ const parsePage = name => html => {
 	};
 };
 
+const parseTable = name => html => {
+	if (html.length < 10) {
+		return {
+			name: name,
+			data: null
+		};
+	}
 
+	const $ = cheerio.load(html);
+
+	const parseInfo = (_, el) => {
+		return {
+			unpNumber: $(el).find('td:nth-child(1)').text(),
+			name: $(el).find('td:nth-child(2)').text(),
+			reqDate: $(el).find('td:nth-child(3)').text(),
+			reason: $(el).find('td:nth-child(4)').text(),
+			dfrDate: $(el).find('td:nth-child(5)').text(),
+			periodTime: $(el).find('td:nth-child(5)').text()
+		};
+	};
+
+	return {
+		name: name,
+		data: $('tr').map(parseInfo).get()
+	};
+};
+
+app.get('/', (req, res) => res.render('index'));
 
 app.post('/search', (req, res) => {
 	const names = req.body.names
@@ -53,10 +80,31 @@ app.post('/search', (req, res) => {
 		.split('\n')
 		.filter(x => !!x);
 
+	let getInfo,
+		parseResult;
+
+	if (req.body.source === 'egr.gov.by/egrn') {
+		getInfo = name => rp('http://egr.gov.by/egrn/index.jsp?content=Find&fmax=1000&vname=' + encodeURIComponent(name));
+		parseResult = parsePage;
+	}
+	if (req.body.source === 'portal.nalog.gov.by/ngb') {
+		getInfo = name => rp({
+			method: 'POST',
+			uri: 'http://www.portal.nalog.gov.by/ngb/data/',
+			form: {
+				elementID: 'find_pname_reestr',
+				begin_between: 1,
+				end_between: 1000,
+				pname: name
+			}
+		});
+		parseResult = parseTable;
+	}
+
 	Promise.all(
-		names.map(name => rp('http://egr.gov.by/egrn/index.jsp?content=Find&fmax=1000&vname=' + encodeURIComponent(name)).then(parsePage(name)))
+		names.map(name => getInfo(name).then(parseResult(name)))
 	).then(data => {
-		res.render('search', { results: data, layout: false });
+		res.render(req.body.source, { results: data });
 	}).catch(err => {
 		console.error(err);
 	});
@@ -64,5 +112,5 @@ app.post('/search', (req, res) => {
 })
 
 app.listen(app.get('port'), () => {
-	console.log('Example app listening on port 3000!');
+	console.log(`Example app listening on port ${app.get('port')}!`);
 });

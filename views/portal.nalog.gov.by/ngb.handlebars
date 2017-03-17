@@ -1,0 +1,39 @@
+<a href="/">Назад</a>
+
+<section class="portal-nalog--ngb">
+	<table class="table-header">
+		<tr>
+			<td class="unpNumber">УНП плательщика</td>
+			<td class="name">Наименование юридического лица/Ф.И.О. индивидуального предпринимателя</td>
+			<td class="reqDate">Дата включения в реестр</td>
+			<td class="reason">Основание для включения в реестр</td>
+			<td class="dfrDate">Дата составления заключения ДФР</td>
+			<td class="periodTime">Период, определенный в заключении ДФР</td>
+		</tr>
+	</table>
+
+	{{#results}}
+		<div class="result">
+			<div class="req-name">{{name}}</div>
+			{{^data}}
+			<div class="not-found">Не найдено</div>
+			{{/data}}
+			{{#data}}
+			<table>
+			{{/data}}
+			{{#data}}
+				<tr>
+					<td class="unpNumber">{{unpNumber}}</td>
+					<td class="name">{{name}}</td>
+					<td class="reqDate">{{reqDate}}</td>
+					<td class="reason">{{reason}}</td>
+					<td class="dfrDate">{{dfrDate}}</td>
+					<td class="periodTime">{{periodTime}}</td>
+				</tr>
+			{{/data}}
+			{{#data}}
+			</table>
+			{{/data}}
+		</div>
+	{{/results}}
+</section>
